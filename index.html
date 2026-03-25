@@ -4,25 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VietData.AI — Data Empowerment Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:    #050d1a;
-  --navy2:   #091426;
-  --navy3:   #0d1e38;
-  --teal:    #00c2cb;
-  --teal2:   #00a8b0;
-  --teal3:   #00e5f0;
-  --blue:    #0066ff;
-  --blue2:   #003db3;
-  --sky:     #5bc8ff;
-  --white:   #f0f8ff;
-  --white2:  #cce4f5;
-  --muted:   #6a8faa;
-  --line:    rgba(0,194,203,.15);
-  --line2:   rgba(0,194,203,.08);
-  --glow:    0 0 40px rgba(0,194,203,.18);
-  --glow2:   0 0 80px rgba(0,102,255,.12);
+:root{
+  --navy:#050d1a; --navy2:#091426; --navy3:#0d1e38;
+  --teal:#00c2cb; --teal2:#00a8b0; --teal3:#00e5f0;
+  --sky:#5bc8ff; --blue:#0066ff;
+  --white:#f0f8ff; --white2:#cce4f5;
+  --muted:#6a8faa;
+  --line:rgba(0,194,203,.15); --line2:rgba(0,194,203,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -31,586 +23,571 @@ body{
   background:var(--navy);
   color:var(--white);
   overflow-x:hidden;
-  cursor:default;
 }
 
-/* ── CURSOR ─────────────────────────────────────── */
-.cursor{
-  position:fixed;width:10px;height:10px;border-radius:50%;
-  background:var(--teal);pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);transition:transform .1s;
-  mix-blend-mode:difference;
-}
-.cursor-ring{
-  position:fixed;width:36px;height:36px;border-radius:50%;
-  border:1px solid rgba(0,194,203,.5);pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);transition:all .18s ease;
-}
-
-/* ── NAV ─────────────────────────────────────────── */
+/* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 5vw;height:70px;
+  padding:0 5vw;height:68px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(5,13,26,.85);
-  backdrop-filter:blur(24px);
+  background:rgba(5,13,26,.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--line2);
-  transition:background .3s;
 }
-.nav-logo{
-  font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:20px;
-  letter-spacing:-.5px;color:var(--white);
-  display:flex;align-items:center;gap:8px;text-decoration:none;
+.logo{
+  font-weight:800;font-size:20px;color:var(--white);
+  text-decoration:none;display:flex;align-items:center;gap:8px;
 }
-.nav-logo-dot{
-  width:9px;height:9px;border-radius:50%;
-  background:var(--teal);box-shadow:0 0 10px var(--teal);
-  animation:pulse 2s ease-in-out infinite;
+.logo-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--teal);
+  box-shadow:0 0 8px var(--teal);
+  animation:blink 2s ease-in-out infinite;
 }
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
-.nav-links{display:flex;gap:32px;list-style:none}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{
-  font-size:13px;font-weight:500;color:var(--muted);
-  text-decoration:none;letter-spacing:.5px;text-transform:uppercase;
-  transition:.2s;position:relative;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
-  background:var(--teal);transform:scaleX(0);transition:.2s;transform-origin:left;
+  font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.8px;
+  text-transform:uppercase;text-decoration:none;transition:.2s;
 }
 .nav-links a:hover{color:var(--teal)}
-.nav-links a:hover::after{transform:scaleX(1)}
 .nav-cta{
-  padding:9px 22px;border-radius:4px;
-  background:transparent;border:1px solid var(--teal);
-  color:var(--teal);font-size:13px;font-weight:500;
+  padding:8px 20px;border-radius:4px;
+  border:1.5px solid var(--teal);background:transparent;
+  color:var(--teal);font-size:13px;font-weight:600;
   font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;
-  transition:.2s;letter-spacing:.3px;text-decoration:none;
+  text-decoration:none;transition:.2s;
 }
 .nav-cta:hover{background:var(--teal);color:var(--navy)}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-ham span{width:22px;height:2px;background:var(--white);border-radius:2px;transition:.2s}
 
-/* ── HERO ────────────────────────────────────────── */
+/* HERO */
 .hero{
-  min-height:100vh;
-  display:flex;align-items:center;
-  padding:0 5vw;
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 5vw 80px;
   position:relative;overflow:hidden;
 }
 .hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,102,255,.10) 0%, transparent 60%),
-             radial-gradient(ellipse 50% 40% at 20% 70%, rgba(0,194,203,.08) 0%, transparent 50%);
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 65% 40%, rgba(0,102,255,.09) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 40% at 15% 65%, rgba(0,194,203,.07) 0%,transparent 55%);
 }
-/* Grid lines */
 .hero-grid{
-  position:absolute;inset:0;z-index:0;
+  position:absolute;inset:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(0,194,203,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,194,203,.04) 1px, transparent 1px);
-  background-size:60px 60px;
+    linear-gradient(rgba(0,194,203,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,194,203,.035) 1px,transparent 1px);
+  background-size:64px 64px;
 }
-/* Floating data nodes */
-.node{
-  position:absolute;border-radius:50%;
-  border:1px solid rgba(0,194,203,.3);
-  animation:float linear infinite;
+/* Animated orbs */
+.orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+  border:1px solid rgba(0,194,203,.2);
+  animation:drift linear infinite;
 }
-.node::after{
+.orb::after{
   content:'';position:absolute;inset:4px;border-radius:50%;
-  background:rgba(0,194,203,.15);
+  background:rgba(0,194,203,.06);
 }
-@keyframes float{
-  0%{transform:translateY(0) rotate(0deg);opacity:.3}
-  50%{opacity:.7}
-  100%{transform:translateY(-120px) rotate(360deg);opacity:0}
+@keyframes drift{
+  0%{transform:translateY(0);opacity:.2}
+  50%{opacity:.5}
+  100%{transform:translateY(-100px);opacity:0}
 }
-.hero-content{position:relative;z-index:2;max-width:760px;}
-.hero-tag{
+.hero-inner{
+  position:relative;z-index:2;max-width:800px;
+  animation:fadeUp .9s ease forwards;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  padding:6px 14px;border-radius:2px;
+  padding:5px 14px;border-radius:20px;margin-bottom:28px;
   background:rgba(0,194,203,.08);border:1px solid rgba(0,194,203,.2);
-  font-size:11px;font-weight:500;color:var(--teal);
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;
+  font-size:11px;font-weight:600;color:var(--teal);
+  letter-spacing:2px;text-transform:uppercase;
+  animation:fadeUp .7s .1s both;
 }
-.hero-tag span{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 1.5s ease infinite}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 1.4s ease infinite}
 .hero-h1{
-  font-family:'Be Vietnam Pro',sans-serif;
-  font-size:clamp(44px,7vw,88px);
-  font-weight:800;line-height:1.0;
-  letter-spacing:-3px;
-  margin-bottom:28px;
+  font-size:clamp(42px,6.5vw,86px);font-weight:800;
+  line-height:1.05;letter-spacing:-2px;margin-bottom:24px;
+  animation:fadeUp .8s .2s both;
 }
-.hero-h1 .hl{
-  background:linear-gradient(135deg, var(--teal) 0%, var(--sky) 50%, var(--teal3) 100%);
+.hl{
+  background:linear-gradient(120deg, var(--teal) 0%, var(--sky) 60%, var(--teal3) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
 }
 .hero-p{
-  font-size:18px;line-height:1.7;color:var(--white2);
-  max-width:540px;margin-bottom:48px;font-weight:300;
+  font-size:17px;line-height:1.75;color:var(--white2);
+  max-width:560px;margin-bottom:40px;font-weight:300;
+  animation:fadeUp .8s .35s both;
 }
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
-.btn-primary{
-  padding:14px 32px;border-radius:4px;
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .5s both}
+.btn-p{
+  padding:13px 30px;border-radius:4px;
   background:var(--teal);color:var(--navy);
-  font-size:14px;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;
-  cursor:pointer;border:none;letter-spacing:.3px;
-  transition:.2s;text-decoration:none;display:inline-block;
+  font-size:14px;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;
+  text-decoration:none;cursor:pointer;border:none;transition:.2s;display:inline-block;
 }
-.btn-primary:hover{background:var(--teal3);transform:translateY(-1px)}
-.btn-outline{
-  padding:14px 32px;border-radius:4px;
-  background:transparent;border:1px solid rgba(255,255,255,.2);
+.btn-p:hover{background:var(--teal3);transform:translateY(-2px)}
+.btn-o{
+  padding:13px 30px;border-radius:4px;
+  background:transparent;border:1.5px solid rgba(255,255,255,.2);
   color:var(--white);font-size:14px;font-weight:400;
-  font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;
-  transition:.2s;text-decoration:none;display:inline-block;
+  font-family:'Be Vietnam Pro',sans-serif;
+  text-decoration:none;cursor:pointer;transition:.2s;display:inline-block;
 }
-.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
-
-/* Hero stats */
+.btn-o:hover{border-color:var(--teal);color:var(--teal)}
 .hero-stats{
-  position:absolute;right:5vw;bottom:80px;z-index:2;
-  display:flex;flex-direction:column;gap:24px;
+  display:flex;gap:36px;margin-top:56px;
+  animation:fadeUp .8s .65s both;
 }
-.stat-item{text-align:right}
-.stat-n{font-family:'Be Vietnam Pro',sans-serif;font-size:36px;font-weight:700;color:var(--teal);line-height:1}
-.stat-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:3px}
+.stat-n{font-size:32px;font-weight:800;color:var(--teal);line-height:1}
+.stat-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
 
-/* Scroll indicator */
-.scroll-ind{
-  position:absolute;bottom:36px;left:5vw;z-index:2;
-  display:flex;align-items:center;gap:12px;
-  font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;
-}
-.scroll-line{
-  width:40px;height:1px;background:var(--teal);
-  position:relative;overflow:hidden;
-}
-.scroll-line::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,var(--teal3),transparent);
-  animation:scan 2s ease-in-out infinite;
-}
-@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
-
-/* ── SECTIONS SHARED ─────────────────────────────── */
-section{padding:100px 5vw}
+/* SHARED */
+.section{padding:96px 5vw;scroll-margin-top:68px}
+.section--alt{background:var(--navy2)}
 .sec-label{
-  font-size:11px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--teal);font-weight:500;margin-bottom:14px;
+  font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal);margin-bottom:12px;
 }
 .sec-h{
-  font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(32px,4vw,52px);
-  font-weight:700;letter-spacing:-1.5px;line-height:1.1;
-  margin-bottom:20px;
+  font-size:clamp(28px,3.5vw,48px);font-weight:800;
+  letter-spacing:-1px;line-height:1.12;margin-bottom:18px;
 }
-.sec-sub{font-size:16px;color:var(--muted);max-width:560px;line-height:1.7;font-weight:300}
+.sec-sub{font-size:15px;color:var(--muted);max-width:540px;line-height:1.75;font-weight:300}
 .divider{
-  width:100%;height:1px;
+  height:1px;
   background:linear-gradient(90deg,transparent,var(--line),transparent);
-  margin:0;
 }
+/* Reveal animation */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.rv.on{opacity:1;transform:translateY(0)}
+.rv.d1{transition-delay:.1s}
+.rv.d2{transition-delay:.2s}
+.rv.d3{transition-delay:.3s}
+.rv.d4{transition-delay:.4s}
 
-/* ── SERVICES ────────────────────────────────────── */
-#services{background:var(--navy2)}
-.services-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:1px;margin-top:60px;
-  background:var(--line2);border:1px solid var(--line2);
+/* SERVICES */
+.svc-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:1px;margin-top:56px;
+  border:1px solid var(--line2);background:var(--line2);
 }
 .svc-card{
-  background:var(--navy2);padding:40px 36px;
-  position:relative;overflow:hidden;transition:.3s;
+  background:var(--navy2);padding:36px 32px;
+  position:relative;overflow:hidden;transition:.25s;cursor:default;
 }
-.svc-card::before{
+.svc-card::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(0,194,203,.06) 0%,transparent 60%);
-  opacity:0;transition:.3s;
+  background:linear-gradient(135deg,rgba(0,194,203,.05),transparent);
+  opacity:0;transition:.25s;
 }
-.svc-card:hover::before{opacity:1}
-.svc-card:hover{transform:translateY(-2px)}
-.svc-num{display:none}
+.svc-card:hover{background:var(--navy3)}
+.svc-card:hover::after{opacity:1}
 .svc-icon{
-  width:72px;height:72px;border-radius:16px;
-  background:linear-gradient(135deg,rgba(0,194,203,.12),rgba(0,102,255,.08));
-  border:1px solid rgba(0,194,203,.2);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:24px;transition:.3s;
+  width:64px;height:64px;border-radius:14px;margin-bottom:20px;
+  background:rgba(0,194,203,.08);border:1px solid rgba(0,194,203,.15);
+  display:flex;align-items:center;justify-content:center;transition:.25s;
 }
-.svc-icon svg{width:36px;height:36px;stroke:var(--teal);stroke-width:1.5;fill:none;transition:.3s}
-.svc-card:hover .svc-icon{background:linear-gradient(135deg,rgba(0,194,203,.22),rgba(0,102,255,.15));border-color:rgba(0,194,203,.5);}
-.svc-card:hover .svc-icon svg{stroke:var(--teal3);transform:scale(1.1)}
-.svc-title{font-family:'Be Vietnam Pro',sans-serif;font-size:20px;font-weight:700;margin-bottom:12px;letter-spacing:-.5px}
-.svc-desc{font-size:14px;line-height:1.7;color:var(--muted);font-weight:300}
-.svc-arrow{
-  margin-top:24px;color:var(--teal);font-size:18px;
-  opacity:0;transition:.2s;transform:translateX(-8px);
+.svc-card:hover .svc-icon{background:rgba(0,194,203,.15);border-color:rgba(0,194,203,.4)}
+.svc-icon svg{width:30px;height:30px;stroke:var(--teal);stroke-width:1.5;fill:none}
+.svc-title{font-size:17px;font-weight:700;margin-bottom:10px;letter-spacing:-.3px}
+.svc-desc{font-size:13px;line-height:1.72;color:var(--muted)}
+.google-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.g-chip{
+  padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;
+  background:rgba(66,133,244,.08);border:1px solid rgba(66,133,244,.25);
+  color:#8ab4f8;letter-spacing:.3px;
 }
-.svc-card:hover .svc-arrow{opacity:1;transform:translateX(0)}
 
-/* ── ABOUT ───────────────────────────────────────── */
-#about{background:var(--navy)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
-@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:40px}}
-.about-visual{position:relative;height:440px}
-.about-box{
-  position:absolute;border-radius:4px;
-  border:1px solid var(--line);background:var(--navy3);
-  padding:20px 24px;transition:.3s;
+/* ABOUT */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;
+  align-items:center;margin-top:56px;
 }
-.about-box:hover{border-color:rgba(0,194,203,.4);transform:translateY(-3px)}
-.ab1{top:0;left:0;right:60px}
-.ab2{top:120px;left:50px;right:0;border-color:rgba(0,102,255,.3);background:rgba(0,102,255,.04)}
-.ab3{bottom:0;left:0;right:80px}
-.ab-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.ab-val{font-family:'Be Vietnam Pro',sans-serif;font-size:28px;font-weight:700;color:var(--teal)}
-.ab-desc{font-size:13px;color:var(--muted);margin-top:4px}
-.connector{
-  position:absolute;width:1px;background:linear-gradient(var(--teal),var(--blue));
-  opacity:.3;
-}
-.about-text{}
-.mission-block,.vision-block{
-  padding:28px;border-radius:4px;
+.about-cards{display:flex;flex-direction:column;gap:16px}
+.ab-card{
+  padding:24px 28px;border-radius:8px;
   border:1px solid var(--line2);background:var(--navy3);
-  margin-bottom:20px;position:relative;overflow:hidden;
+  border-left-width:3px;transition:.2s;
 }
-.mission-block::before,.vision-block::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+.ab-card:hover{border-color:rgba(0,194,203,.4);transform:translateX(4px)}
+.ab-card.mission{border-left-color:var(--teal)}
+.ab-card.vision{border-left-color:var(--blue)}
+.ab-card.values{border-left-color:var(--sky)}
+.ab-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.mission .ab-lbl{color:var(--teal)}
+.vision .ab-lbl{color:var(--sky)}
+.values .ab-lbl{color:var(--muted)}
+.ab-txt{font-size:14px;line-height:1.75;color:var(--white2);font-weight:300}
+.about-text{}
+.kv-tag{
+  display:inline-flex;gap:8px;flex-wrap:wrap;margin-top:16px;
 }
-.mission-block::before{background:var(--teal)}
-.vision-block::before{background:var(--blue)}
-.mv-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
-.vision-block .mv-label{color:var(--sky)}
-.mv-text{font-size:14px;line-height:1.75;color:var(--white2);font-weight:300}
+.kv-pill{
+  padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  background:rgba(0,194,203,.07);border:1px solid rgba(0,194,203,.2);
+  color:var(--teal);
+}
+.about-meta{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px;
+}
+.meta-box{
+  padding:18px 20px;border-radius:6px;border:1px solid var(--line2);background:var(--navy3);
+}
+.meta-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.meta-val{font-size:15px;font-weight:700;color:var(--white)}
 
-/* ── CLIENTS ─────────────────────────────────────── */
-#clients{background:var(--navy2)}
-.clients-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;gap:40px;flex-wrap:wrap}
-.industry-grid{display:grid;gap:1px;background:var(--line2);border:1px solid var(--line2)}
-.industry-row{
-  display:grid;grid-template-columns:160px 1fr;
-  background:var(--navy2);transition:.2s;
+/* CLIENTS */
+.ind-table{margin-top:56px;border:1px solid var(--line2)}
+.ind-row{
+  display:grid;grid-template-columns:140px 1fr;
+  border-bottom:1px solid var(--line2);transition:.2s;
 }
-.industry-row:hover{background:var(--navy3)}
-.industry-label{
-  padding:24px 20px;border-right:1px solid var(--line2);
-  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--teal);font-weight:500;
+.ind-row:last-child{border-bottom:none}
+.ind-row:hover{background:rgba(0,194,203,.03)}
+.ind-label{
+  padding:20px 18px;border-right:1px solid var(--line2);
+  font-size:10px;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--teal);font-weight:600;
   display:flex;align-items:center;
 }
-.industry-logos{
-  padding:20px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+.ind-logos{
+  padding:16px 20px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
 }
-.logo-chip{
-  padding:10px 18px;border-radius:6px;
-  border:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.04);
-  font-size:13px;font-weight:600;color:var(--white2);
-  letter-spacing:.2px;transition:.25s;white-space:nowrap;
+.lchip{
   display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  font-size:12px;font-weight:600;color:var(--white2);
+  transition:.2s;white-space:nowrap;cursor:default;
 }
-.logo-chip:hover{border-color:rgba(0,194,203,.45);color:var(--white);background:rgba(0,194,203,.07);transform:translateY(-1px)}
-.logo-chip.highlight{
-  border-color:rgba(0,194,203,.35);
-  background:rgba(0,194,203,.07);color:var(--teal);font-weight:700;
+.lchip:hover{
+  border-color:rgba(0,194,203,.4);color:var(--teal);
+  background:rgba(0,194,203,.06);transform:translateY(-1px);
 }
-.logo-chip img{height:22px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.8;transition:.25s}
-.logo-chip:hover img{opacity:1}
-.logo-chip.highlight img{filter:none;opacity:1}
-.ai-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
-  padding:2px 7px;border-radius:2px;
+.lchip.hi{
+  border-color:rgba(0,194,203,.3);color:var(--teal);
+  background:rgba(0,194,203,.06);font-weight:700;
+}
+.lchip img{
+  height:20px;width:auto;object-fit:contain;
+  filter:brightness(0) invert(1);opacity:.7;transition:.2s;
+}
+.lchip:hover img,.lchip.hi img{opacity:1;filter:brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(140deg)}
+.ai-pill{
+  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:1px 6px;border-radius:3px;
   background:rgba(0,102,255,.15);border:1px solid rgba(0,102,255,.3);
-  color:var(--sky);vertical-align:middle;margin-left:4px;
+  color:#93c5fd;
 }
 
-/* ── HISTORY ─────────────────────────────────────── */
-#history{background:var(--navy)}
-.history-content{display:grid;grid-template-columns:1fr 2fr;gap:80px;margin-top:60px;align-items:start}
-@media(max-width:860px){.history-content{grid-template-columns:1fr}}
-.history-text{font-size:16px;line-height:1.85;color:var(--white2);font-weight:300}
-.history-text p+p{margin-top:20px}
-.timeline{position:relative;padding-left:24px}
-.timeline::before{
-  content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;
-  background:linear-gradient(var(--teal),transparent);
+/* HISTORY */
+.history-grid{
+  display:grid;grid-template-columns:1fr 2fr;gap:72px;
+  margin-top:56px;align-items:start;
 }
-.tl-item{margin-bottom:40px;position:relative}
-.tl-dot{
-  position:absolute;left:-28px;top:6px;
+.timeline{padding-left:20px;border-left:1px solid rgba(0,194,203,.2)}
+.tl-item{margin-bottom:36px;position:relative;padding-left:20px}
+.tl-item::before{
+  content:'';position:absolute;left:-25px;top:6px;
   width:9px;height:9px;border-radius:50%;
-  background:var(--teal);box-shadow:0 0 10px var(--teal);
+  background:var(--teal);box-shadow:0 0 8px var(--teal);
 }
-.tl-year{
-  font-family:'Be Vietnam Pro',sans-serif;font-size:11px;
-  color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;
-}
-.tl-title{font-family:'Be Vietnam Pro',sans-serif;font-size:18px;font-weight:600;margin-bottom:8px;letter-spacing:-.3px}
-.tl-desc{font-size:14px;line-height:1.7;color:var(--muted);font-weight:300}
+.tl-year{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.tl-ttl{font-size:17px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+.tl-desc{font-size:13px;line-height:1.7;color:var(--muted)}
+.history-body{font-size:15px;line-height:1.85;color:var(--white2);font-weight:300}
+.history-body p+p{margin-top:18px}
 
-/* ── CONTACT ─────────────────────────────────────── */
-#contact{background:var(--navy2)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px}
-@media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
-.contact-info{}
-.info-block{
-  padding:24px;border:1px solid var(--line2);
-  border-radius:4px;background:var(--navy3);margin-bottom:16px;
-  transition:.2s;
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px}
+.info-card{
+  padding:22px 24px;border-radius:6px;border:1px solid var(--line2);
+  background:var(--navy3);margin-bottom:14px;transition:.2s;
 }
-.info-block:hover{border-color:rgba(0,194,203,.3)}
-.info-label{
-  font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--teal);margin-bottom:8px;
+.info-card:hover{border-color:rgba(0,194,203,.3)}
+.info-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.info-val{font-size:13px;line-height:1.7;color:var(--white2)}
+.info-val strong{color:var(--white)}
+.mst-tag{
+  display:inline-flex;align-items:center;gap:6px;margin-top:6px;
+  padding:3px 12px;border-radius:3px;font-size:12px;font-weight:600;
+  background:rgba(0,194,203,.06);border:1px solid rgba(0,194,203,.15);color:var(--teal);
 }
-.info-val{font-size:14px;line-height:1.6;color:var(--white2);font-weight:400}
-.info-val strong{color:var(--white);font-weight:500}
-.tax-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:4px 12px;border-radius:2px;
-  background:rgba(0,194,203,.06);border:1px solid rgba(0,194,203,.15);
-  font-size:12px;color:var(--teal);font-family:'Be Vietnam Pro',sans-serif;
-  margin-top:6px;
+/* FORM */
+.form-panel{
+  padding:36px;border-radius:8px;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,rgba(0,194,203,.04),rgba(0,102,255,.02));
 }
-.contact-cta{
-  padding:40px;border:1px solid var(--line);border-radius:4px;
-  background:linear-gradient(135deg,rgba(0,194,203,.06),rgba(0,102,255,.04));
-}
-.cta-h{font-family:'Be Vietnam Pro',sans-serif;font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:14px}
-.cta-p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:32px;font-weight:300}
-.contact-form{}
-.form-group{margin-bottom:16px}
-.form-group label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
-.form-group input,
-.form-group textarea{
-  width:100%;padding:12px 16px;
-  background:rgba(255,255,255,.04);
+.form-h{font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:26px;line-height:1.6}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.1);
-  border-radius:4px;color:var(--white);
+  border-radius:6px;color:var(--white);
   font-family:'Be Vietnam Pro',sans-serif;font-size:14px;
   outline:none;transition:.2s;resize:none;
 }
-.form-group input:focus,
-.form-group textarea:focus{border-color:rgba(0,194,203,.5);background:rgba(0,194,203,.04)}
-.form-group input::placeholder,
-.form-group textarea::placeholder{color:rgba(255,255,255,.2)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:rgba(0,194,203,.5);background:rgba(0,194,203,.04);
+}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.22)}
+.fg select option{background:var(--navy2)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-submit{
+  width:100%;padding:13px;border-radius:6px;
+  background:var(--teal);color:var(--navy);
+  font-size:14px;font-weight:700;
+  font-family:'Be Vietnam Pro',sans-serif;
+  cursor:pointer;border:none;transition:.2s;margin-top:4px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-submit:hover{background:var(--teal3)}
+.form-note{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+.form-note a{color:var(--teal);text-decoration:none}
 
-/* ── FOOTER ──────────────────────────────────────── */
+/* FOOTER */
 footer{
-  padding:48px 5vw;
-  border-top:1px solid var(--line2);background:var(--navy);
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+  padding:40px 5vw;background:var(--navy);
+  border-top:1px solid var(--line2);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
 }
-.footer-logo{
-  font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:18px;
-  color:var(--white);display:flex;align-items:center;gap:8px;
-}
-.footer-links{display:flex;gap:24px;list-style:none}
+.footer-logo{font-size:18px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:8px}
+.footer-links{display:flex;gap:22px;list-style:none}
 .footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:.2s}
 .footer-links a:hover{color:var(--teal)}
-.footer-copy{font-size:12px;color:var(--muted)}
+.footer-copy{font-size:11px;color:var(--muted)}
 
-/* ── ANIMATIONS ──────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
-.reveal-delay-4{transition-delay:.4s}
-
-/* ── MOBILE ──────────────────────────────────────── */
+/* MOBILE */
+@media(max-width:860px){
+  .about-grid,.history-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .form-row{grid-template-columns:1fr}
+}
 @media(max-width:768px){
   .nav-links{display:none}
-  .hero-stats{display:none}
-  .services-grid{grid-template-columns:1fr}
+  .nav-links.open{
+    display:flex;flex-direction:column;gap:0;
+    position:fixed;top:68px;left:0;right:0;
+    background:var(--navy2);border-bottom:1px solid var(--line2);
+    padding:16px 0;z-index:99;
+  }
+  .nav-links.open li a{display:block;padding:12px 5vw;font-size:14px}
+  .nav-ham{display:flex}
+  .hero-h1{letter-spacing:-1px}
+  .about-meta{grid-template-columns:1fr 1fr}
+  .ind-row{grid-template-columns:1fr}
+  .ind-label{border-right:none;border-bottom:1px solid var(--line2);padding:12px 16px}
 }
 </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- ═══ NAV ═══ -->
+<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">
-    <div class="nav-logo-dot"></div>
+  <a class="logo" href="#">
+    <span class="logo-dot"></span>
     VietData<span style="color:var(--teal)">.AI</span>
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#services">Dịch vụ</a></li>
     <li><a href="#about">Về chúng tôi</a></li>
     <li><a href="#clients">Khách hàng</a></li>
     <li><a href="#history">Lịch sử</a></li>
     <li><a href="#contact">Liên hệ</a></li>
   </ul>
-  <a class="nav-cta" href="#contact">Tư vấn ngay</a>
+  <div style="display:flex;align-items:center;gap:16px">
+    <a class="nav-cta" href="#contact">Tư vấn ngay</a>
+    <div class="nav-ham" id="ham" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <!-- Orbs -->
+  <div class="orb" style="width:90px;height:90px;top:22%;left:58%;animation-duration:9s"></div>
+  <div class="orb" style="width:50px;height:50px;top:55%;left:72%;animation-duration:11s;animation-delay:2s"></div>
+  <div class="orb" style="width:130px;height:130px;top:28%;left:82%;animation-duration:13s;animation-delay:1s"></div>
+  <div class="orb" style="width:30px;height:30px;top:68%;left:63%;animation-duration:8s;animation-delay:3s"></div>
 
-  <!-- Floating nodes -->
-  <div class="node" style="width:80px;height:80px;top:20%;left:55%;animation-duration:8s;animation-delay:0s"></div>
-  <div class="node" style="width:40px;height:40px;top:60%;left:70%;animation-duration:10s;animation-delay:2s"></div>
-  <div class="node" style="width:120px;height:120px;top:30%;left:80%;animation-duration:12s;animation-delay:1s"></div>
-  <div class="node" style="width:25px;height:25px;top:70%;left:60%;animation-duration:7s;animation-delay:3s"></div>
-
-  <div class="hero-content">
-    <div class="hero-tag"><span></span>Nền tảng dữ liệu doanh nghiệp</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Đội ngũ đồng hành chuyển đổi số
+    </div>
     <h1 class="hero-h1">
-      Trao quyền<br>
-      dữ liệu cho<br>
-      <span class="hl">Việt Nam</span>
+      Đồng hành<br>
+      chuyển đổi số<br>
+      <span class="hl">cùng Google</span>
     </h1>
     <p class="hero-p">
-      Đội ngũ đồng hành cùng doanh nghiệp Việt Nam trên hành trình chuyển đổi số — ứng dụng hệ sinh thái Google Cloud, thu thập dữ liệu web &amp; mobile, từ giải pháp đơn giản đến hoàn thiện.
+      VietData.AI — đội ngũ tư vấn dữ liệu và chuyển đổi số cho doanh nghiệp Việt Nam,
+      ứng dụng hệ sinh thái Google Cloud để thu thập, phân tích và khai thác dữ liệu hiệu quả.
     </p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#services">Khám phá dịch vụ</a>
-      <a class="btn-outline" href="#about">Về chúng tôi</a>
+    <div class="hero-btns">
+      <a class="btn-p" href="#services">Khám phá dịch vụ</a>
+      <a class="btn-o" href="#contact">Tư vấn miễn phí</a>
     </div>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-n">50+</div>
-      <div class="stat-l">Doanh nghiệp</div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n">50+</div>
+        <div class="stat-l">Doanh nghiệp</div>
+      </div>
+      <div>
+        <div class="stat-n">8+</div>
+        <div class="stat-l">Ngành nghề</div>
+      </div>
+      <div>
+        <div class="stat-n">2030</div>
+        <div class="stat-l">Tầm nhìn</div>
+      </div>
     </div>
-    <div class="stat-item">
-      <div class="stat-n">8+</div>
-      <div class="stat-l">Ngành nghề</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-n">2030</div>
-      <div class="stat-l">Tầm nhìn</div>
-    </div>
-  </div>
-
-  <div class="scroll-ind">
-    <div class="scroll-line"></div>
-    Cuộn xuống
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ SERVICES ═══ -->
-<section id="services">
-  <div class="sec-label reveal">Dịch vụ</div>
-  <h2 class="sec-h reveal reveal-delay-1">Giải pháp dữ liệu<br>toàn diện</h2>
-  <p class="sec-sub reveal reveal-delay-2">Đội ngũ đồng hành cùng doanh nghiệp — ứng dụng hệ sinh thái Google Cloud, BigQuery, Looker, Workspace để chuyển đổi số hiệu quả, không tự xây nền tảng.</p>
-  <div class="reveal reveal-delay-3" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
-    <span style="padding:6px 14px;border-radius:3px;border:1px solid rgba(66,133,244,.35);background:rgba(66,133,244,.07);font-size:12px;color:#8ab4f8;font-weight:500">Google Cloud</span>
-    <span style="padding:6px 14px;border-radius:3px;border:1px solid rgba(66,133,244,.35);background:rgba(66,133,244,.07);font-size:12px;color:#8ab4f8;font-weight:500">BigQuery</span>
-    <span style="padding:6px 14px;border-radius:3px;border:1px solid rgba(66,133,244,.35);background:rgba(66,133,244,.07);font-size:12px;color:#8ab4f8;font-weight:500">Looker Studio</span>
-    <span style="padding:6px 14px;border-radius:3px;border:1px solid rgba(66,133,244,.35);background:rgba(66,133,244,.07);font-size:12px;color:#8ab4f8;font-weight:500">Google Workspace</span>
-    <span style="padding:6px 14px;border-radius:3px;border:1px solid rgba(66,133,244,.35);background:rgba(66,133,244,.07);font-size:12px;color:#8ab4f8;font-weight:500">Vertex AI</span>
+<!-- SERVICES -->
+<section class="section section--alt" id="services">
+  <div class="sec-label rv">Dịch vụ</div>
+  <h2 class="sec-h rv d1">Giải pháp dữ liệu<br>toàn diện</h2>
+  <p class="sec-sub rv d2">Đội ngũ đồng hành — không tự xây nền tảng, ứng dụng tối đa hệ sinh thái Google để chuyển đổi số hiệu quả cho từng doanh nghiệp.</p>
+
+  <div class="google-chips rv d3">
+    <span class="g-chip">Google Cloud</span>
+    <span class="g-chip">BigQuery</span>
+    <span class="g-chip">Looker Studio</span>
+    <span class="g-chip">Google Workspace</span>
+    <span class="g-chip">Vertex AI</span>
+    <span class="g-chip">Firebase</span>
   </div>
 
-  <div class="services-grid reveal reveal-delay-3">
+  <div class="svc-grid rv d4">
+    <!-- 1 -->
     <div class="svc-card">
-      <div class="svc-num">01</div>
-      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
       <div class="svc-title">Tư vấn dữ liệu</div>
       <p class="svc-desc">Phân tích nhu cầu, thiết kế kiến trúc dữ liệu, xây dựng chiến lược data governance phù hợp với từng doanh nghiệp.</p>
-      <div class="svc-arrow">→</div>
     </div>
+    <!-- 2 -->
     <div class="svc-card">
-      <div class="svc-num">02</div>
-      <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <div class="svc-title">Thu thập dữ liệu Web & App</div>
-      <p class="svc-desc">Xây dựng hệ thống crawling, scraping, tracking analytics tối ưu cho website và mobile application ở quy mô lớn.</p>
-      <div class="svc-arrow">→</div>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="svc-title">Thu thập dữ liệu Web &amp; App</div>
+      <p class="svc-desc">Xây dựng hệ thống crawling, scraping, tracking analytics tối ưu cho website và mobile app ở quy mô lớn.</p>
     </div>
+    <!-- 3 -->
     <div class="svc-card">
-      <div class="svc-num">03</div>
-      <div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 20 6 20 2 12 6 4 18 4 22 12"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
-      <div class="svc-title">Chuyển đổi số</div>
-      <p class="svc-desc">Đồng hành cùng doanh nghiệp trên nền tảng Google Cloud, Workspace, Looker Studio — không tự xây, chỉ tối ưu và ứng dụng hiệu quả nhất cho từng đơn vị.</p>
-      <div class="svc-arrow">→</div>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="svc-title">Chuyển đổi số với Google</div>
+      <p class="svc-desc">Triển khai Google Workspace, Looker Studio, Cloud Run — đồng hành cùng doanh nghiệp từ giải pháp đơn giản đến hoàn thiện.</p>
     </div>
+    <!-- 4 -->
     <div class="svc-card">
-      <div class="svc-num">04</div>
-      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-      <div class="svc-title">AI & Machine Learning</div>
-      <p class="svc-desc">Phát triển và triển khai các mô hình AI ứng dụng thực tế — nhận diện, dự báo, phân loại, tối ưu hóa kinh doanh.</p>
-      <div class="svc-arrow">→</div>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="svc-title">AI &amp; Machine Learning</div>
+      <p class="svc-desc">Phát triển và triển khai mô hình AI trên Vertex AI — nhận diện, dự báo, phân loại, tối ưu hóa kinh doanh.</p>
     </div>
+    <!-- 5 -->
     <div class="svc-card">
-      <div class="svc-num">05</div>
-      <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></div>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      </div>
       <div class="svc-title">Data Engineering</div>
-      <p class="svc-desc">Xây dựng data pipeline, ETL, data warehouse, data lake. Đảm bảo chất lượng và tính nhất quán của dữ liệu trong toàn hệ thống.</p>
-      <div class="svc-arrow">→</div>
+      <p class="svc-desc">Xây dựng data pipeline, ETL, BigQuery data warehouse. Đảm bảo chất lượng và tính nhất quán dữ liệu toàn hệ thống.</p>
     </div>
+    <!-- 6 -->
     <div class="svc-card">
-      <div class="svc-num">06</div>
-      <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="8" y1="15" x2="8" y2="17"/><line x1="12" y1="15" x2="12" y2="17"/><line x1="16" y1="15" x2="16" y2="17"/></svg></div>
-      <div class="svc-title">Bảo mật & Quản trị dữ liệu</div>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="svc-title">Bảo mật &amp; Quản trị dữ liệu</div>
       <p class="svc-desc">Đảm bảo an toàn thông tin, tuân thủ quy định, quản lý vòng đời dữ liệu và xây dựng chính sách data compliance.</p>
-      <div class="svc-arrow">→</div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ ABOUT ═══ -->
-<section id="about">
-  <div class="sec-label reveal">Về VietData.AI</div>
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="sec-label rv">Về VietData.AI</div>
   <div class="about-grid">
-    <div class="about-visual reveal">
-      <div class="about-box ab1">
-        <div class="ab-label">Sứ mệnh</div>
-        <div class="ab-val">Trao quyền</div>
-        <div class="ab-desc">Đồng hành cùng doanh nghiệp Việt</div>
+    <div class="about-cards rv d1">
+      <div class="ab-card mission">
+        <div class="ab-lbl">Sứ mệnh</div>
+        <p class="ab-txt">
+          VietData.AI là <strong style="color:var(--white)">đội ngũ đồng hành cùng doanh nghiệp Việt Nam</strong> — không tự xây nền tảng mà khai thác tối đa sức mạnh hệ sinh thái Google để giúp doanh nghiệp làm chủ dữ liệu và phát triển bền vững.
+        </p>
       </div>
-      <div class="about-box ab2">
-        <div class="ab-label">Tầm nhìn 2030</div>
-        <div class="ab-val" style="color:var(--sky)">#1 Platform</div>
-        <div class="ab-desc">Nền tảng data hàng đầu Việt Nam</div>
+      <div class="ab-card vision">
+        <div class="ab-lbl">Tầm nhìn 2030</div>
+        <p class="ab-txt">
+          Trở thành <strong style="color:var(--white)">đội ngũ tư vấn chuyển đổi số hàng đầu tại Việt Nam</strong>, nơi mọi doanh nghiệp đều tiếp cận được công nghệ Google-powered để phân tích dữ liệu, tự động hóa và tăng trưởng hiệu quả.
+        </p>
       </div>
-      <div class="about-box ab3">
-        <div class="ab-label">Giá trị cốt lõi</div>
-        <div class="ab-val">Data-first</div>
-        <div class="ab-desc">Đổi mới · An toàn · Hiệu quả</div>
+      <div class="ab-card values">
+        <div class="ab-lbl">Giá trị cốt lõi</div>
+        <div class="kv-tag">
+          <span class="kv-pill">Đồng hành</span>
+          <span class="kv-pill">An toàn</span>
+          <span class="kv-pill">Thực tiễn</span>
+          <span class="kv-pill">Hiệu quả</span>
+        </div>
       </div>
-      <!-- Decorative line -->
-      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" opacity=".15">
-        <line x1="10%" y1="30%" x2="10%" y2="80%" stroke="#00c2cb" stroke-width="1" stroke-dasharray="4 4"/>
-        <circle cx="10%" cy="30%" r="3" fill="#00c2cb"/>
-        <circle cx="10%" cy="80%" r="3" fill="#00c2cb"/>
-      </svg>
     </div>
 
-    <div class="about-text reveal reveal-delay-2">
-      <h2 class="sec-h" style="margin-bottom:32px">Chúng tôi tin vào<br><span style="color:var(--teal)">sức mạnh dữ liệu</span></h2>
+    <div class="about-text rv d2">
+      <h2 class="sec-h" style="margin-bottom:16px">
+        Chúng tôi tin vào<br>
+        <span style="color:var(--teal)">sức mạnh dữ liệu</span>
+      </h2>
+      <p class="sec-sub">
+        VietData.AI ra đời từ niềm đam mê dữ liệu và khát vọng đồng hành cùng doanh nghiệp Việt trong hành trình chuyển đổi số — ứng dụng những nền tảng công nghệ tốt nhất thế giới vào thực tiễn Việt Nam.
+      </p>
 
-      <div class="mission-block">
-        <div class="mv-label">Sứ mệnh</div>
-        <p class="mv-text">
-          Tại VietData.AI, chúng tôi là <strong style="color:var(--white)">đội ngũ đồng hành cùng doanh nghiệp Việt Nam</strong> trong hành trình chuyển đổi số — không tự xây nền tảng, mà khai thác tối đa sức mạnh hệ sinh thái Google (Google Cloud, Workspace, Looker, BigQuery) để giúp doanh nghiệp làm chủ dữ liệu và phát triển bền vững.
-        </p>
-      </div>
-
-      <div class="vision-block">
-        <div class="mv-label">Tầm nhìn</div>
-        <p class="mv-text">
-          Trở thành <strong style="color:var(--white)">đội ngũ tư vấn chuyển đổi số hàng đầu tại Việt Nam vào năm 2030</strong>, nơi mọi doanh nghiệp đều có thể tiếp cận công nghệ Google-powered để phân tích dữ liệu, tự động hóa và tăng trưởng hiệu quả.
-        </p>
-      </div>
-
-      <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
-        <span class="logo-chip highlight">Đổi mới</span>
-        <span class="logo-chip highlight">An toàn</span>
-        <span class="logo-chip highlight">Thân thiện</span>
-        <span class="logo-chip highlight">Hiệu quả</span>
+      <div class="about-meta">
+        <div class="meta-box">
+          <div class="meta-lbl">Mã số thuế</div>
+          <div class="meta-val">6101172020</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-lbl">Loại hình</div>
+          <div class="meta-val">TNHH</div>
+        </div>
+        <div class="meta-box" style="grid-column:1/-1">
+          <div class="meta-lbl">Trụ sở chính</div>
+          <div class="meta-val" style="font-size:13px;font-weight:400;color:var(--white2)">Đường Tuyến N5-4 Làng Nghề Hnor, P. Đăk BLa, Tỉnh Quảng Ngãi</div>
+        </div>
+        <div class="meta-box" style="grid-column:1/-1">
+          <div class="meta-lbl">Văn phòng đại diện</div>
+          <div class="meta-val" style="font-size:13px;font-weight:400;color:var(--white2)">Số 10 Lương Định Của, P. An Khánh, TP. Hồ Chí Minh</div>
+        </div>
       </div>
     </div>
   </div>
@@ -618,89 +595,83 @@ footer{
 
 <div class="divider"></div>
 
-<!-- ═══ CLIENTS ═══ -->
-<section id="clients">
-  <div class="clients-intro">
-    <div>
-      <div class="sec-label reveal">Khách hàng & Đối tác</div>
-      <h2 class="sec-h reveal reveal-delay-1">Phục vụ doanh nghiệp<br>hàng đầu Việt Nam</h2>
-    </div>
-    <p class="sec-sub reveal reveal-delay-2" style="margin:0;font-size:14px">
-      Đội ngũ VietData.AI đang hỗ trợ các doanh nghiệp và tổ chức giáo dục trong hành trình chuyển đổi số và tận dụng sức mạnh dữ liệu.
-    </p>
-  </div>
+<!-- CLIENTS -->
+<section class="section section--alt" id="clients">
+  <div class="sec-label rv">Khách hàng &amp; Đối tác</div>
+  <h2 class="sec-h rv d1">Phục vụ doanh nghiệp<br>hàng đầu Việt Nam</h2>
+  <p class="sec-sub rv d2">Đội ngũ VietData.AI đang hỗ trợ các doanh nghiệp và tổ chức giáo dục trong hành trình chuyển đổi số và khai thác dữ liệu.</p>
 
-  <div class="industry-grid reveal">
-    <div class="industry-row">
-      <div class="industry-label">FSI</div>
-      <div class="industry-logos">
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/vib.com.vn" alt="VIB" onerror="this.style.display='none'"><span>VIB</span><span class="ai-badge">AI</span></span>
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/sacombank.com" alt="Sacombank" onerror="this.style.display='none'"><span>Sacombank</span><span class="ai-badge">AI</span></span>
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/fecredit.com.vn" alt="FE Credit" onerror="this.style.display='none'"><span>FE Credit</span><span class="ai-badge">AI</span></span>
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/msb.com.vn" alt="MSB" onerror="this.style.display='none'"><span>MSB</span><span class="ai-badge">AI</span></span>
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/vpbank.com.vn" alt="VPBank" onerror="this.style.display='none'"><span>VPBank</span><span class="ai-badge">AI</span></span>
+  <div class="ind-table rv d3">
+    <div class="ind-row">
+      <div class="ind-label">FSI</div>
+      <div class="ind-logos">
+        <span class="lchip hi">VIB <span class="ai-pill">AI</span></span>
+        <span class="lchip hi">Sacombank <span class="ai-pill">AI</span></span>
+        <span class="lchip hi">FE Credit <span class="ai-pill">AI</span></span>
+        <span class="lchip hi">MSB <span class="ai-pill">AI</span></span>
+        <span class="lchip hi">VPBank <span class="ai-pill">AI</span></span>
       </div>
     </div>
-    <div class="industry-row">
-      <div class="industry-label">ICT</div>
-      <div class="industry-logos">
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/cellphones.com.vn" alt="CellphoneS" onerror="this.style.display='none'"><span>CellphoneS</span><span class="ai-badge">AI</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/cloud.google.com" alt="Cloud ACE" onerror="this.style.display='none'"><span>Cloud ACE</span></span>
-        <span class="logo-chip">+ Đối tác khác</span>
+    <div class="ind-row">
+      <div class="ind-label">ICT</div>
+      <div class="ind-logos">
+        <span class="lchip hi">CellphoneS <span class="ai-pill">AI</span></span>
+        <span class="lchip">Cloud ACE</span>
+        <span class="lchip">+ Đối tác khác</span>
       </div>
     </div>
-    <div class="industry-row">
-      <div class="industry-label">Property</div>
-      <div class="industry-logos">
-        <span class="logo-chip"><img src="https://logo.clearbit.com/vinhomes.vn" alt="Vinhomes" onerror="this.style.display='none'"><span>Vinhomes</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/onehousing.vn" alt="OneHousing" onerror="this.style.display='none'"><span>OneHousing</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/vanphu-invest.com" alt="VanPhu Invest" onerror="this.style.display='none'"><span>VanPhu Invest</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/savills.com.vn" alt="Savills" onerror="this.style.display='none'"><span>Savills</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/satsco.com.vn" alt="SATSCO" onerror="this.style.display='none'"><span>SATSCO</span></span>
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/newwayrealty.vn" alt="NewwayRealty" onerror="this.style.display='none'"><span>NewwayRealty</span></span>
+    <div class="ind-row">
+      <div class="ind-label">Property</div>
+      <div class="ind-logos">
+        <span class="lchip">Vinhomes</span>
+        <span class="lchip">OneHousing</span>
+        <span class="lchip">VanPhu Invest</span>
+        <span class="lchip">Savills</span>
+        <span class="lchip">SATSCO</span>
+        <span class="lchip hi">NewwayRealty</span>
       </div>
     </div>
-    <div class="industry-row">
-      <div class="industry-label">Travel &amp; CS</div>
-      <div class="industry-logos">
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/vietnamairlines.com" alt="Vietnam Airlines" onerror="this.style.display='none'"><span>Vietnam Airlines</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/vinpearl.com" alt="Vinpearl" onerror="this.style.display='none'"><span>Vinpearl</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/vietravel.com.vn" alt="Vietravel" onerror="this.style.display='none'"><span>Vietravel</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/shangri-la.com" alt="Shangri-La" onerror="this.style.display='none'"><span>Shangri-La</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/ritzcarlton.com" alt="The Ritz-Carlton" onerror="this.style.display='none'"><span>The Ritz-Carlton</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/7-eleven.com.vn" alt="7-Eleven" onerror="this.style.display='none'"><span>7-Eleven</span></span>
+    <div class="ind-row">
+      <div class="ind-label">Travel &amp; CS</div>
+      <div class="ind-logos">
+        <span class="lchip hi">Vietnam Airlines</span>
+        <span class="lchip">Vinpearl</span>
+        <span class="lchip">Vietravel</span>
+        <span class="lchip">Shangri-La</span>
+        <span class="lchip">The Ritz-Carlton</span>
+        <span class="lchip">7-Eleven</span>
       </div>
     </div>
-    <div class="industry-row">
-      <div class="industry-label">Automotive</div>
-      <div class="industry-logos">
-        <span class="logo-chip"><img src="https://logo.clearbit.com/be.com.vn" alt="Be Group" onerror="this.style.display='none'"><span>Be Group</span></span>
+    <div class="ind-row">
+      <div class="ind-label">Automotive</div>
+      <div class="ind-logos">
+        <span class="lchip">Be Group</span>
       </div>
     </div>
-    <div class="industry-row">
-      <div class="industry-label">Health</div>
-      <div class="industry-logos">
-        <span class="logo-chip"><img src="https://logo.clearbit.com/hoanmyhospital.com" alt="Hoàn Mỹ" onerror="this.style.display='none'"><span>Hoàn Mỹ</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/vinmec.com" alt="Vinmec" onerror="this.style.display='none'"><span>Vinmec</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/htppharma.vn" alt="HTP Pharma" onerror="this.style.display='none'"><span>HTP Pharma</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/vitadairy.vn" alt="VitaDairy" onerror="this.style.display='none'"><span>VitaDairy</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/vinamilk.com.vn" alt="Vinamilk" onerror="this.style.display='none'"><span>Vinamilk</span></span>
+    <div class="ind-row">
+      <div class="ind-label">Health</div>
+      <div class="ind-logos">
+        <span class="lchip">Hoàn Mỹ</span>
+        <span class="lchip">Vinmec</span>
+        <span class="lchip">HTP Pharma</span>
+        <span class="lchip">VitaDairy</span>
+        <span class="lchip">Vinamilk</span>
       </div>
     </div>
-    <div class="industry-row">
-      <div class="industry-label">Publisher</div>
-      <div class="industry-logos">
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/tuoitre.vn" alt="Tuổi Trẻ" onerror="this.style.display='none'"><span>Tuổi Trẻ</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/congan.com.vn" alt="Công an Nhân dân" onerror="this.style.display='none'"><span>Công an Nhân dân</span></span>
+    <div class="ind-row">
+      <div class="ind-label">Publisher</div>
+      <div class="ind-logos">
+        <span class="lchip hi">Tuổi Trẻ</span>
+        <span class="lchip">Công an Nhân dân</span>
       </div>
     </div>
-    <div class="industry-row">
-      <div class="industry-label">Education</div>
-      <div class="industry-logos">
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/hcmuc.edu.vn" alt="ĐH Văn Hóa TP.HCM" onerror="this.style.display='none'"><span>ĐH Văn Hóa TP.HCM</span></span>
-        <span class="logo-chip highlight"><img src="https://logo.clearbit.com/fulbright.edu.vn" alt="Fulbright University" onerror="this.style.display='none'"><span>Fulbright University</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/fptpolytechnic.edu.vn" alt="FPT Polytechnic" onerror="this.style.display='none'"><span>FPT Polytechnic</span></span>
-        <span class="logo-chip"><img src="https://logo.clearbit.com/wallstreetenglish.com.vn" alt="Wall Street English" onerror="this.style.display='none'"><span>Wall Street English</span></span>
+    <div class="ind-row">
+      <div class="ind-label">Education</div>
+      <div class="ind-logos">
+        <span class="lchip hi">ĐH Văn Hóa TP.HCM</span>
+        <span class="lchip hi">Fulbright University</span>
+        <span class="lchip">FPT Polytechnic</span>
+        <span class="lchip">Wall Street English</span>
       </div>
     </div>
   </div>
@@ -708,131 +679,136 @@ footer{
 
 <div class="divider"></div>
 
-<!-- ═══ HISTORY ═══ -->
-<section id="history">
-  <div class="sec-label reveal">Lịch sử hình thành</div>
-  <h2 class="sec-h reveal reveal-delay-1">Hành trình<br><span style="color:var(--teal)">đổi mới dữ liệu</span></h2>
+<!-- HISTORY -->
+<section class="section" id="history">
+  <div class="sec-label rv">Lịch sử hình thành</div>
+  <h2 class="sec-h rv d1">Hành trình <span style="color:var(--teal)">đổi mới</span></h2>
 
-  <div class="history-content">
-    <div class="timeline reveal reveal-delay-2">
+  <div class="history-grid">
+    <div class="timeline rv d2">
       <div class="tl-item">
-        <div class="tl-dot"></div>
         <div class="tl-year">Khởi đầu</div>
-        <div class="tl-title">Ý tưởng hình thành</div>
-        <p class="tl-desc">Ra đời từ niềm đam mê dữ liệu và tầm nhìn dân chủ hóa quyền sở hữu dữ liệu tại Việt Nam.</p>
+        <div class="tl-ttl">Ý tưởng hình thành</div>
+        <p class="tl-desc">Ra đời từ niềm đam mê dữ liệu và khát vọng đồng hành cùng doanh nghiệp Việt Nam trong chuyển đổi số.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-dot" style="background:var(--blue);box-shadow:0 0 10px var(--blue)"></div>
-        <div class="tl-year">Phát triển</div>
-        <div class="tl-title">Startup năng động</div>
-        <p class="tl-desc">Phát triển thành startup với đội ngũ khoa học dữ liệu, kỹ sư và những người có tầm nhìn tận tâm.</p>
+        <div class="tl-year" style="color:var(--sky)">Phát triển</div>
+        <div class="tl-ttl">Startup năng động</div>
+        <p class="tl-desc">Phát triển thành startup với đội ngũ kỹ sư, nhà khoa học dữ liệu và chuyên gia Google Cloud tận tâm.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-dot" style="background:var(--sky);box-shadow:0 0 10px var(--sky)"></div>
-        <div class="tl-year">Hiện tại</div>
-        <div class="tl-title">Đổi mới liên tục</div>
-        <p class="tl-desc">Phục vụ 50+ doanh nghiệp hàng đầu trên 8 ngành nghề, tiếp tục mở rộng và đổi mới.</p>
+        <div class="tl-year" style="color:var(--sky)">Hiện tại</div>
+        <div class="tl-ttl">Mở rộng liên tục</div>
+        <p class="tl-desc">Phục vụ 50+ doanh nghiệp hàng đầu trên 8 ngành nghề tại Việt Nam, tiếp tục đổi mới và mở rộng.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-dot" style="background:transparent;border:2px solid var(--teal)"></div>
-        <div class="tl-year">2030</div>
-        <div class="tl-title">Tầm nhìn tương lai</div>
-        <p class="tl-desc">Nền tảng trao quyền dữ liệu hàng đầu Việt Nam — mọi công dân và doanh nghiệp làm chủ dữ liệu của mình.</p>
+        <div class="tl-year" style="color:var(--muted)">2030</div>
+        <div class="tl-ttl">Tầm nhìn tương lai</div>
+        <p class="tl-desc">Đội ngũ tư vấn chuyển đổi số hàng đầu Việt Nam — mọi doanh nghiệp đều tiếp cận được công nghệ Google-powered.</p>
       </div>
     </div>
 
-    <div class="history-text reveal reveal-delay-3">
-      <p>
-        VietData.AI ra đời từ niềm đam mê dữ liệu và tầm nhìn dân chủ hóa quyền sở hữu dữ liệu tại Việt Nam. Nhận thức được tầm quan trọng ngày càng tăng của dữ liệu trong thời đại kỹ thuật số, những người sáng lập đã đặt ra mục tiêu tạo ra một nền tảng cho phép các cá nhân và doanh nghiệp nắm quyền kiểm soát dữ liệu của họ.
-      </p>
-      <p>
-        Từ những khởi đầu khiêm tốn, chúng tôi đã phát triển thành một công ty khởi nghiệp năng động, được dẫn dắt bởi một đội ngũ các nhà khoa học dữ liệu, kỹ sư và những người có tầm nhìn tận tâm. Trong những năm qua, chúng tôi đã phát triển các công nghệ và giải pháp tiên tiến, giúp vô số khách hàng khai thác giá trị dữ liệu của họ.
-      </p>
-      <p>
-        Hành trình của chúng tôi được đánh dấu bằng sự đổi mới liên tục, cam kết hướng đến sự xuất sắc và niềm tin sâu sắc vào sức mạnh chuyển đổi của dữ liệu. Khi hướng tới tương lai, chúng tôi vẫn kiên định với mục tiêu trao quyền cho mỗi người Việt Nam làm chủ dữ liệu của mình và từ đó, làm chủ vận mệnh của chính họ.
-      </p>
-
-      <!-- Info cards -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px">
-        <div style="padding:20px;border:1px solid var(--line2);border-radius:4px;background:var(--navy3)">
-          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px">Mã số thuế</div>
-          <div style="font-family:'Be Vietnam Pro',sans-serif;font-size:16px;font-weight:600;color:var(--white)">6101172020</div>
-        </div>
-        <div style="padding:20px;border:1px solid var(--line2);border-radius:4px;background:var(--navy3)">
-          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px">Loại hình</div>
-          <div style="font-family:'Be Vietnam Pro',sans-serif;font-size:16px;font-weight:600;color:var(--white)">TNHH</div>
-        </div>
-      </div>
+    <div class="history-body rv d3">
+      <p>VietData.AI ra đời từ niềm đam mê dữ liệu và tầm nhìn về chuyển đổi số toàn diện cho doanh nghiệp Việt Nam. Nhận thức được tầm quan trọng ngày càng tăng của dữ liệu trong thời đại kỹ thuật số, chúng tôi xác định rõ hướng đi: không tự xây dựng nền tảng mà trở thành đội ngũ đồng hành, ứng dụng những công nghệ tốt nhất — đặc biệt là hệ sinh thái Google — để phục vụ doanh nghiệp.</p>
+      <p>Từ những bước đầu khiêm tốn, VietData.AI phát triển thành một startup năng động với đội ngũ kỹ sư dữ liệu, chuyên gia Google Cloud và những người có tầm nhìn tận tâm. Chúng tôi đã triển khai thành công các dự án thu thập dữ liệu, phân tích, AI và chuyển đổi số cho nhiều doanh nghiệp hàng đầu Việt Nam.</p>
+      <p>Hành trình được đánh dấu bởi sự đổi mới liên tục và cam kết bền vững: mỗi giải pháp đều được tối ưu cho thực tiễn Việt Nam, mỗi doanh nghiệp đối tác đều được đồng hành với sự tận tâm tối đa.</p>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ CONTACT ═══ -->
-<section id="contact">
-  <div class="sec-label reveal">Liên hệ</div>
-  <h2 class="sec-h reveal reveal-delay-1">Bắt đầu hành trình<br><span style="color:var(--teal)">dữ liệu của bạn</span></h2>
+<!-- CONTACT -->
+<section class="section section--alt" id="contact">
+  <div class="sec-label rv">Liên hệ</div>
+  <h2 class="sec-h rv d1">Bắt đầu hành trình<br><span style="color:var(--teal)">cùng chúng tôi</span></h2>
 
   <div class="contact-grid">
-    <div class="contact-info reveal reveal-delay-2">
-      <div class="info-block">
-        <div class="info-label">Công ty</div>
+    <!-- Info -->
+    <div class="rv d2">
+      <div class="info-card">
+        <div class="info-lbl">Công ty</div>
         <div class="info-val">
           <strong>CÔNG TY TNHH VIETDATA AI</strong><br>
           VietData AI Company Limited
         </div>
-        <div class="tax-badge">MST: 6101172020</div>
+        <div class="mst-tag">MST: 6101172020</div>
       </div>
-      <div class="info-block">
-        <div class="info-label">Trụ sở chính</div>
-        <div class="info-val">Đường Tuyến N5-4 Làng Nghề Hnor,<br>Phường Đăk BLa, Tỉnh Quảng Ngãi,<br>Việt Nam</div>
+      <div class="info-card">
+        <div class="info-lbl">Trụ sở chính</div>
+        <div class="info-val">Đường Tuyến N5-4 Làng Nghề Hnor,<br>Phường Đăk BLa, Tỉnh Quảng Ngãi, Việt Nam</div>
       </div>
-      <div class="info-block">
-        <div class="info-label">Văn phòng đại diện</div>
-        <div class="info-val"><strong>Số 10 Lương Định Của,</strong><br>Phường An Khánh, TP Hồ Chí Minh,<br>Việt Nam</div>
+      <div class="info-card">
+        <div class="info-lbl">Văn phòng đại diện</div>
+        <div class="info-val"><strong>Số 10 Lương Định Của,</strong><br>Phường An Khánh, TP. Hồ Chí Minh</div>
+      </div>
+      <div class="info-card">
+        <div class="info-lbl">Email hỗ trợ</div>
+        <div class="info-val"><a href="mailto:support@vietdatai.com" style="color:var(--teal);text-decoration:none;font-weight:600">support@vietdatai.com</a></div>
       </div>
       <div style="display:flex;gap:10px;margin-top:8px">
-        <a class="btn-primary" href="/cdn-cgi/l/email-protection#c8a1a6aea788bea1adbcaca9bca9e6a9a1" style="flex:1;text-align:center">Email chúng tôi</a>
-        <a class="btn-outline" href="tel:+84" style="flex:1;text-align:center">Gọi ngay</a>
+        <a class="btn-p" href="mailto:support@vietdatai.com" style="flex:1;text-align:center">Gửi email ngay</a>
       </div>
     </div>
 
-    <div class="contact-cta reveal reveal-delay-3">
-      <h3 class="cta-h">Gửi yêu cầu tư vấn</h3>
-      <p class="cta-p">Để lại thông tin, đội ngũ VietData.AI sẽ liên hệ trong vòng 24 giờ làm việc.</p>
-      <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label>Họ và tên</label>
-          <input type="text" id="fname" name="name" placeholder="Nguyễn Văn A" required>
-        </div>
-        <div class="form-group">
-          <label>Email liên hệ</label>
-          <input type="email" id="femail" name="email" placeholder="email@congty.com" required>
-        </div>
-        <div class="form-group">
-          <label>Số điện thoại</label>
-          <input type="tel" id="fphone" name="phone" placeholder="0901 234 567">
-        </div>
-        <div class="form-group">
-          <label>Công ty</label>
-          <input type="text" id="fcompany" name="company" placeholder="Tên doanh nghiệp của bạn">
-        </div>
-        <div class="form-group">
-          <label>Nhu cầu tư vấn</label>
-          <textarea rows="3" id="fmsg" name="message" placeholder="Mô tả ngắn nhu cầu dữ liệu / chuyển đổi số của bạn..."></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width:100%" id="submitBtn">Gửi yêu cầu →</button>
-        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px">Gửi đến <span style="color:var(--teal)">support@vietdatai.com</span> · Phản hồi trong 24h làm việc</p>
-      </form>
+    <!-- Form -->
+    <div class="rv d3">
+      <div class="form-panel">
+        <div class="form-h">Gửi yêu cầu tư vấn</div>
+        <p class="form-sub">Để lại thông tin, đội ngũ sẽ phản hồi trong 24h làm việc.</p>
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="fg">
+              <label>Họ và tên *</label>
+              <input type="text" id="fname" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div class="fg">
+              <label>Email *</label>
+              <input type="email" id="femail" placeholder="email@congty.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fg">
+              <label>Số điện thoại</label>
+              <input type="tel" id="fphone" placeholder="0901 234 567">
+            </div>
+            <div class="fg">
+              <label>Công ty</label>
+              <input type="text" id="fcompany" placeholder="Tên doanh nghiệp">
+            </div>
+          </div>
+          <div class="fg">
+            <label>Dịch vụ quan tâm</label>
+            <select id="fservice">
+              <option value="">-- Chọn dịch vụ --</option>
+              <option>Tư vấn dữ liệu</option>
+              <option>Thu thập dữ liệu Web & App</option>
+              <option>Chuyển đổi số với Google</option>
+              <option>AI & Machine Learning</option>
+              <option>Data Engineering</option>
+              <option>Bảo mật & Quản trị dữ liệu</option>
+              <option>Tư vấn tổng thể</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Nội dung cần tư vấn</label>
+            <textarea id="fmsg" rows="4" placeholder="Mô tả ngắn nhu cầu của bạn..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Gửi yêu cầu tư vấn
+          </button>
+          <p class="form-note">Gửi đến <a href="mailto:support@vietdatai.com">support@vietdatai.com</a> · Phản hồi trong 24h</p>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">
-    <div class="nav-logo-dot"></div>
+    <span class="logo-dot"></span>
     VietData<span style="color:var(--teal)">.AI</span>
   </div>
   <ul class="footer-links">
@@ -844,73 +820,77 @@ footer{
   <div class="footer-copy">© 2025 VietData AI Company Limited · MST 6101172020</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── Custom cursor ─────────────────────────────────
-const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx+'px'; cursor.style.top = my+'px';
-});
-function animRing(){
-  rx += (mx-rx)*.12; ry += (my-ry)*.12;
-  ring.style.left = rx+'px'; ring.style.top = ry+'px';
-  requestAnimationFrame(animRing);
+<script>
+// ── Mobile menu
+function toggleMenu(){
+  document.getElementById('navLinks').classList.toggle('open');
 }
-animRing();
-
-document.querySelectorAll('a,button,.svc-card,.logo-chip').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.6)';ring.style.borderColor='rgba(0,194,203,.8)'});
-  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(0,194,203,.5)'});
+// Close on link click
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
 });
 
-// ── Scroll reveal ─────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ── Scroll reveal
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('on');
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.rv').forEach(el=>observer.observe(el));
 
-// ── Nav active state ──────────────────────────────
+// ── Nav background on scroll
 window.addEventListener('scroll',()=>{
   const nav = document.querySelector('nav');
-  nav.style.background = window.scrollY > 60
-    ? 'rgba(5,13,26,.96)' : 'rgba(5,13,26,.85)';
+  nav.style.background = window.scrollY>50
+    ? 'rgba(5,13,26,.97)'
+    : 'rgba(5,13,26,.92)';
+},{passive:true});
+
+// ── Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
 });
 
-// ── Form submit ───────────────────────────────────
-function handleSubmit(e){
+// ── Contact form → mailto
+function submitForm(e){
   e.preventDefault();
   const name    = document.getElementById('fname').value.trim();
   const email   = document.getElementById('femail').value.trim();
   const phone   = document.getElementById('fphone').value.trim();
   const company = document.getElementById('fcompany').value.trim();
+  const service = document.getElementById('fservice').value;
   const msg     = document.getElementById('fmsg').value.trim();
   const btn     = document.getElementById('submitBtn');
 
-  const subject = encodeURIComponent('Yêu cầu tư vấn từ ' + (company || name));
+  const subject = encodeURIComponent('Yeu cau tu van tu ' + (company || name));
   const body = encodeURIComponent(
-    'Họ tên: ' + name + '\n' +
+    'Ho ten: ' + name + '\n' +
     'Email: ' + email + '\n' +
-    'Điện thoại: ' + phone + '\n' +
-    'Công ty: ' + company + '\n\n' +
-    'Nhu cầu:\n' + msg
+    'Dien thoai: ' + (phone || 'Chua cung cap') + '\n' +
+    'Cong ty: ' + (company || 'Chua cung cap') + '\n' +
+    'Dich vu quan tam: ' + (service || 'Chua chon') + '\n\n' +
+    'Nhu cau:\n' + (msg || 'Khong co mo ta')
   );
 
-  btn.textContent = 'Đang mở email...';
+  btn.disabled = true;
   btn.style.opacity = '.7';
+  btn.innerHTML = 'Dang mo email...';
 
   window.location.href = 'mailto:support@vietdatai.com?subject=' + subject + '&body=' + body;
 
   setTimeout(()=>{
-    btn.textContent = '✓ Đã chuẩn bị email — kiểm tra ứng dụng mail của bạn';
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Da chuan bi email - Kiem tra ung dung mail cua ban';
     btn.style.background = 'var(--teal2)';
     btn.style.opacity = '1';
-  }, 1000);
+    btn.disabled = false;
+  }, 1200);
 }
-
-// ── Smooth scroll ─────────────────────────────────
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const target=document.querySelector(a.getAt
+</script>
+</body>
+</html>
